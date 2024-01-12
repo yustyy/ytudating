@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/genders")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GendersController {
 
     private GenderService genderService;

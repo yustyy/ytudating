@@ -26,6 +26,7 @@ public class GenderManager implements GenderService {
             return new ErrorResult(Messages.genderCannotBeNull);
         }
 
+        genderDao.save(gender);
         return new SuccessResult(Messages.addGenderSuccess);
     }
 

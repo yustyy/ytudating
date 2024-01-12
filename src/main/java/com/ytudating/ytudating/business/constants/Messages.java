@@ -39,15 +39,16 @@ public class Messages {
     public static String getUserSwipeSuccess = "Kullanıcı swipe bilgisi başarıyla alındı.";
     public static String userSwiperDoesntExist = "Kullanıcı swiper bulunamadı.";
     public static String getUserSwipeByIdSuccess = "Kullanıcı swipe bilgisi ID'ye göre başarıyla alındı.";
-    public static String nameOrSurnameCannotBeNull;
-    public static String dateCannotBeNull;
-    public static String sexualOrientationGenderCannotBeNull;
-    public static String profilePictureCannotBeEmpty;
-    public static String schoolMailCannotBeNull;
-    public static String departmentOrFacultyCannotBeNull;
-    public static String addUserSuccess;
-    public static List<User> getUsersEmpty;
-    public static List<User> getUsersSuccess;
-    public static User getUserByIdSuccess;
-    public static User userDoesntExist;
+    public static String nameOrSurnameCannotBeNull = "Ad veya soyadı boş olamaz!";
+    public static String dateCannotBeNull = "Doğum tarihi boş olamaz!";
+    public static String sexualOrientationGenderCannotBeNull = "Cinsel yönelim veya cinsiyet boş olamaz!";
+    public static String profilePictureCannotBeEmpty = "Profil fotoğrafı boş olamaz!";
+    public static String schoolMailCannotBeNull = "Okul e-posta adresi boş olamaz!";
+    public static String departmentOrFacultyCannotBeNull = "Bölüm veya fakülte boş olamaz!";
+
+    public static String addUserSuccess = "Kullanıcı başarıyla eklendi.";
+    public static String getUsersEmpty = "Kullanıcı bulunamadı.";
+    public static String getUsersSuccess = "Kullanıcılar başarıyla alındı.";
+    public static String getUserByIdSuccess = "Kullanıcı bilgisi ID'ye göre başarıyla alındı.";
+    public static String userDoesntExist = "Kullanıcı bulunamadı.";
 }

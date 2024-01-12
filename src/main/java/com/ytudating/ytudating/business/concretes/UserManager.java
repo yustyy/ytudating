@@ -76,7 +76,7 @@ public class UserManager implements UserService {
             return new SuccessDataResult<List<User>>(Messages.getUsersEmpty);
         }
 
-        return new SuccessDataResult<List<User>>(Messages.getUsersSuccess);
+        return new SuccessDataResult<List<User>>(result, Messages.getUsersSuccess);
 
     }
 

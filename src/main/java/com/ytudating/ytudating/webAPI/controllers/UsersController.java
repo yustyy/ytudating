@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UsersController {
 
     private UserService userService;
@@ -21,7 +22,7 @@ public class UsersController {
     }
 
     @PostMapping("/addUser")
-    public Result addUser(@RequestParam User user){
+    public Result addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
