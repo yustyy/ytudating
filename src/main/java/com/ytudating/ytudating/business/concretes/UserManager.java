@@ -4,6 +4,7 @@ import com.ytudating.ytudating.business.abstracts.UserService;
 import com.ytudating.ytudating.business.constants.Messages;
 import com.ytudating.ytudating.core.utilities.result.*;
 import com.ytudating.ytudating.dataAccess.abstracts.UserDao;
+import com.ytudating.ytudating.entities.Role;
 import com.ytudating.ytudating.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserManager implements UserService, UserDetailsService {
@@ -31,12 +33,15 @@ public class UserManager implements UserService, UserDetailsService {
     @Override
     public Result addUser(User user) {
 
+        /*
+
+
         //name ve lastname birlikte kontrol edilsi pipe ile ||
         if(user.getFirstName().isEmpty() || user.getLastName().isEmpty()){
             return new ErrorResult(Messages.nameOrSurnameCannotBeNull);
         }
 
-        if(user.getProfilePicture().isEmpty()){
+        if(user.getProfilePicture() == null){
             return new ErrorResult(Messages.profilePictureCannotBeEmpty);
         }
 
@@ -69,8 +74,10 @@ public class UserManager implements UserService, UserDetailsService {
             return new ErrorResult(Messages.departmentOrFacultyCannotBeNull);
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+         */
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         //user.setAuthorities();
 
         user.setAccountNonExpired(true);
@@ -89,7 +96,7 @@ public class UserManager implements UserService, UserDetailsService {
         var result = userDao.findAll();
 
         if(result.isEmpty()){
-            return new SuccessDataResult<List<User>>(Messages.getUsersEmpty);
+            return new ErrorDataResult<List<User>>(Messages.getUsersEmpty);
         }
 
         return new SuccessDataResult<List<User>>(result, Messages.getUsersSuccess);
@@ -101,7 +108,7 @@ public class UserManager implements UserService, UserDetailsService {
         var result = userDao.findById(id);
 
         if(result == null){
-            return new SuccessDataResult<User>(Messages.userDoesntExist);
+            return new ErrorDataResult<User>(Messages.userDoesntExist);
         }
 
         return new SuccessDataResult<User>(Messages.getUserByIdSuccess);
@@ -111,12 +118,11 @@ public class UserManager implements UserService, UserDetailsService {
     @Override
     public DataResult<User> getByUsername(String username) {
         var result = userDao.findByUsername(username);
-
         if(result == null){
             return new ErrorDataResult<User>(Messages.userDoesntExist);
         }
 
-        return new SuccessDataResult<User>(Messages.getUserByUsernameSuccess);
+        return new SuccessDataResult<User>(result, Messages.getUserByUsernameSuccess);
     }
 
     @Override

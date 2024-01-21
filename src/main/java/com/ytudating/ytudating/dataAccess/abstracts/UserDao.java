@@ -11,6 +11,6 @@ public interface UserDao extends JpaRepository<User,Integer> {
 
     User findById(int id);
 
-    Optional<User> findByUsername(String userName);
+    User findByUsername(String userName);
 
 }

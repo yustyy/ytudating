@@ -1,6 +1,9 @@
 package com.ytudating.ytudating.webAPI.controllers;
 
+import com.ytudating.ytudating.business.abstracts.UserService;
 import com.ytudating.ytudating.core.security.JwtService;
+import com.ytudating.ytudating.core.utilities.result.Result;
+import com.ytudating.ytudating.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,11 +17,13 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserService userService;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService) {
+    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.userService = userService;
     }
 
     @PostMapping("/generateToken")
@@ -29,5 +34,10 @@ public class AuthController {
     }
     throw new UsernameNotFoundException("invalid username");
 }
+
+    @PostMapping("/registerUser")
+    public Result registerUser(@RequestBody User user){
+        return userService.addUser(user);
+    }
 
 }

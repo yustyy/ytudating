@@ -5,6 +5,7 @@ import com.ytudating.ytudating.core.utilities.result.DataResult;
 import com.ytudating.ytudating.core.utilities.result.Result;
 import com.ytudating.ytudating.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,11 @@ public class UsersController {
     @GetMapping("/getUsers")
     public DataResult<List<User>> getUsers(){
         return userService.getUsers();
+    }
+
+    @GetMapping("/getByUsername")
+    public DataResult<User> getByUsername(@RequestParam String username){
+        return userService.getByUsername(username);
     }
 
     @GetMapping("/getUserById")
