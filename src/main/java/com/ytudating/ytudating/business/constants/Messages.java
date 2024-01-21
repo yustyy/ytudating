@@ -45,10 +45,10 @@ public class Messages {
     public static String profilePictureCannotBeEmpty = "Profil fotoğrafı boş olamaz!";
     public static String schoolMailCannotBeNull = "Okul e-posta adresi boş olamaz!";
     public static String departmentOrFacultyCannotBeNull = "Bölüm veya fakülte boş olamaz!";
-
     public static String addUserSuccess = "Kullanıcı başarıyla eklendi.";
     public static String getUsersEmpty = "Kullanıcı bulunamadı.";
     public static String getUsersSuccess = "Kullanıcılar başarıyla alındı.";
     public static String getUserByIdSuccess = "Kullanıcı bilgisi ID'ye göre başarıyla alındı.";
     public static String userDoesntExist = "Kullanıcı bulunamadı.";
+    public static String getUserByUsernameSuccess;
 }
