@@ -34,8 +34,6 @@ public class UserManager implements UserService, UserDetailsService {
     public Result addUser(User user) {
 
         /*
-
-
         //name ve lastname birlikte kontrol edilsi pipe ile ||
         if(user.getFirstName().isEmpty() || user.getLastName().isEmpty()){
             return new ErrorResult(Messages.nameOrSurnameCannotBeNull);
@@ -73,8 +71,6 @@ public class UserManager implements UserService, UserDetailsService {
         if(user.getDepartmentId() == 0 || user.getFacultyId() == 0){
             return new ErrorResult(Messages.departmentOrFacultyCannotBeNull);
         }
-
-
          */
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -84,7 +80,6 @@ public class UserManager implements UserService, UserDetailsService {
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
         user.setAccountNonLocked(true);
-
 
 
         userDao.save(user);
@@ -111,7 +106,7 @@ public class UserManager implements UserService, UserDetailsService {
             return new ErrorDataResult<User>(Messages.userDoesntExist);
         }
 
-        return new SuccessDataResult<User>(Messages.getUserByIdSuccess);
+        return new SuccessDataResult<User>(result,Messages.getUserByIdSuccess);
 
     }
 
