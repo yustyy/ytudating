@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/interests")
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:3000/signup" })
 public class InterestsController {
 
     private InterestService interestService;

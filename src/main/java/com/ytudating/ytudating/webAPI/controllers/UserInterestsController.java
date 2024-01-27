@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/userInterest")
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:3000/signup" })
 public class UserInterestsController {
 
     private UserInterestService userInterestService;

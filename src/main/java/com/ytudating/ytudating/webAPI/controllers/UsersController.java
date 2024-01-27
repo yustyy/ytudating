@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
-@CrossOrigin(origins = {"http://localhost:3000","http://localhost:3000/swipe"})
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:3000/swipe" })
 public class UsersController {
 
     private UserService userService;
@@ -40,6 +40,12 @@ public class UsersController {
     @GetMapping("/getUserById")
     public DataResult<User> getUserById(@RequestParam int userId){
         return userService.getUserById(userId);
+    }
+
+    @GetMapping("/getUserBySwipe")
+    public DataResult<User> getUserBySwipe(@RequestParam int userId){
+    return userService.getUserBySwipe(userId);
+
     }
 
 }

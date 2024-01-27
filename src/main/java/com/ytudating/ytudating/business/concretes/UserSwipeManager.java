@@ -49,10 +49,10 @@ public class UserSwipeManager implements UserSwipeService {
         var result = userSwipeDao.findAll();
 
         if(result.isEmpty()){
-            return new SuccessDataResult<List<UserSwipe>>(Messages.userSwipesEmpty);
+            return new ErrorDataResult<List<UserSwipe>>(Messages.userSwipesEmpty);
         }
 
-        return new SuccessDataResult<List<UserSwipe>>(Messages.getUserSwipeSuccess);
+        return new SuccessDataResult<List<UserSwipe>>(result, Messages.getUserSwipeSuccess);
 
     }
 
@@ -65,4 +65,15 @@ public class UserSwipeManager implements UserSwipeService {
         }
         return new SuccessDataResult<UserSwipe>(result, Messages.getUserSwipeByIdSuccess);
     }
+
+    @Override
+    public Result isSwiped(int swiperId, int swipedId) {
+        var result = userSwipeDao.findBySwiperIdAndSwipedId(swiperId,swipedId);
+
+        if(result == null){
+            return new ErrorResult();
+        }
+        return new SuccessResult();
+    }
 }
+

@@ -1,6 +1,7 @@
 package com.ytudating.ytudating.business.concretes;
 
 import com.ytudating.ytudating.business.abstracts.UserService;
+import com.ytudating.ytudating.business.abstracts.UserSwipeService;
 import com.ytudating.ytudating.business.constants.Messages;
 import com.ytudating.ytudating.core.utilities.result.*;
 import com.ytudating.ytudating.dataAccess.abstracts.UserDao;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @Service
@@ -24,10 +26,13 @@ public class UserManager implements UserService, UserDetailsService {
 
     private BCryptPasswordEncoder passwordEncoder;
 
+    private UserSwipeService userSwipeService;
+
     @Autowired
-    public UserManager(UserDao userDao, BCryptPasswordEncoder passwordEncoder) {
+    public UserManager(UserDao userDao, BCryptPasswordEncoder passwordEncoder, UserSwipeService userSwipeService) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.userSwipeService = userSwipeService;
     }
 
     @Override
@@ -89,8 +94,9 @@ public class UserManager implements UserService, UserDetailsService {
     @Override
     public DataResult<List<User>> getUsers() {
         var result = userDao.findAll();
+        getUserBySwipe(1);
 
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             return new ErrorDataResult<List<User>>(Messages.getUsersEmpty);
         }
 
@@ -102,18 +108,18 @@ public class UserManager implements UserService, UserDetailsService {
     public DataResult<User> getUserById(int id) {
         var result = userDao.findById(id);
 
-        if(result == null){
+        if (result == null) {
             return new ErrorDataResult<User>(Messages.userDoesntExist);
         }
 
-        return new SuccessDataResult<User>(result,Messages.getUserByIdSuccess);
+        return new SuccessDataResult<User>(result, Messages.getUserByIdSuccess);
 
     }
 
     @Override
     public DataResult<User> getByUsername(String username) {
         var result = userDao.findByUsername(username);
-        if(result == null){
+        if (result == null) {
             return new ErrorDataResult<User>(Messages.userDoesntExist);
         }
 
@@ -125,4 +131,33 @@ public class UserManager implements UserService, UserDetailsService {
         var user = getByUsername(username).getData();
         return user;
     }
+
+
+    //kullanıcının kaydırıp kaydırmadıgına bak, kaydırdıysa önüne cıkarma
+    @Override
+    public DataResult<User> getUserBySwipe(int id) {
+        Random random = new Random();
+        var userCount = userDao.findAll().size();
+
+
+
+        int attempt = 0;
+
+        while (attempt < userCount) {
+            int randomNumber = random.nextInt(userCount) + 1;
+
+            if (!userSwipeService.isSwiped(id, randomNumber).isSuccess()) {
+                if(id == randomNumber){
+                }
+                var unSwipedUser = userDao.findById(randomNumber);
+                return new SuccessDataResult<>(unSwipedUser, Messages.getUserBySwipeSuccess);
+            }
+
+            attempt++;
+        }
+
+        return new ErrorDataResult<User>(Messages.herkesleTanistin);
+    }
+
 }
+

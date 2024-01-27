@@ -51,4 +51,11 @@ public class Messages {
     public static String getUserByIdSuccess = "Kullanıcı bilgisi ID'ye göre başarıyla alındı.";
     public static String userDoesntExist = "Kullanıcı bulunamadı.";
     public static String getUserByUsernameSuccess;
+    public static String getBySwiperIdAndSwipedIdDoesntExist
+            ;
+    public static String getBySwiperIdAndSwipedIdSuccess;
+    public static String getUserBySwipeSuccess;
+    public static String herkesleTanistin;
+    public static String  noSuitableUserFound;
+    public static String  noUsersToSwipe;
 }

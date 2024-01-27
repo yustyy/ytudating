@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/userSwipes")
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:3000/signup" })
 public class UserSwipesController {
 
     private UserSwipeService userSwipeService;
